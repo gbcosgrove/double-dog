@@ -1,5 +1,6 @@
 module DoubleDog
   class SeeAllOrders <SuccessFailure
+    include AdminSession
 
 
     def run(params)
@@ -10,9 +11,5 @@ module DoubleDog
       return success(orders: orders)
     end
 
-    def admin_session?(session_id)
-      user = DoubleDog.db.get_user_by_session_id(session_id)
-      user && user.admin?
-    end
   end
 end

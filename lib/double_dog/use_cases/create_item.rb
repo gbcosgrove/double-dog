@@ -1,5 +1,6 @@
 module DoubleDog
   class CreateItem < SuccessFailure
+    include AdminSession
 
     def run(params)
       ## Refactor repated failure and succes definitions !!
@@ -9,11 +10,6 @@ module DoubleDog
 
       item = DoubleDog.db.create_item(:name => params[:name], :price => params[:price])
       return success(:item => item)
-    end
-
-    def admin_session?(session_id)
-      user = DoubleDog.db.get_user_by_session_id(session_id)
-      user && user.admin?
     end
 
     def valid_name?(name)
