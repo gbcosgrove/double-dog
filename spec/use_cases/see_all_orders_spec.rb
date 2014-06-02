@@ -2,10 +2,19 @@ require 'spec_helper'
 
 describe DoubleDog::SeeAllOrders do
 
+let(:use_case) do
+    use_case = DoubleDog::SeeAllOrders.new
+    expect(use_case).to receive(:admin_session?).and_return(@auth_admin)
+    use_case
+  end
+
+  before do
+    @auth_admin = true
+  end
+
   describe "Validation" do
     it "requires the user to be an admin" do
-      use_case = DoubleDog::SeeAllOrders.new
-      expect(use_case).to receive(:admin_session?).and_return(false)
+      @auth_admin = false
 
       result = use_case.run(admin_session: 'stubbed')
 
@@ -19,9 +28,6 @@ describe DoubleDog::SeeAllOrders do
     item_2 = DoubleDog.db.create_item(name: 'fries', price: 3)
     order_1 = DoubleDog.db.create_order(session_id: 'stubbed', items: [item_1, item_2])
     order_2 = DoubleDog.db.create_order(session_id: 'stubbed', items: [item_2])
-
-    use_case = DoubleDog::SeeAllOrders.new
-    expect(use_case).to receive(:admin_session?).and_return(true)
 
     result = use_case.run(admin_session: 'stubbed')
 

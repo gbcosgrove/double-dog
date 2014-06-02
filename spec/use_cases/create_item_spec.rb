@@ -23,33 +23,24 @@ let(:use_case) do
     end
 
     it "requires a name" do
-      ## This is called stubbing
-      # expect(use_case).to receive(:admin_session?).and_return(true)
-
       result = use_case.run(:name => nil, :price => 5)
       expect(result[:success?]).to eq false
       expect(result[:error]).to eq :invalid_name
     end
 
     it "requires the name to be at least one character" do
-      # expect(use_case).to receive(:admin_session?).and_return(true)
-
       result = use_case.run(:name => '', :price => 5)
       expect(result[:success?]).to eq false
       expect(result[:error]).to eq :invalid_name
     end
 
     it "requires a price" do
-      # expect(use_case).to receive(:admin_session?).and_return(true)
-
       result = use_case.run(:name => 'x', :price => nil)
       expect(result[:success?]).to eq false
       expect(result[:error]).to eq :invalid_price
     end
 
     it "requires a price to be more than fiftey cents" do
-      # expect(use_case).to receive(:admin_session?).and_return(true)
-
       result = use_case.run(:name => 'y', :price => 0.4)
       expect(result[:success?]).to eq false
       expect(result[:error]).to eq :invalid_price
