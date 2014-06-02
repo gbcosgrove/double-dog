@@ -2,6 +2,7 @@ module DoubleDog
   class CreateAccount
 
     def run(params)
+      # Refactor repeated failure and succes definitions !!
       return failure(:not_admin) unless admin_session?(params[:session_id])
       return failure(:invalid_username) unless valid_username?(params[:username])
       return failure(:invalid_password) unless valid_password?(params[:password])
@@ -26,10 +27,12 @@ module DoubleDog
   private
 
     def failure(error_name)
+      # Refactor Here
       return :success? => false, :error => error_name
     end
 
     def success(data)
+      # Refactor Here
       return data.merge(:success? => true)
     end
   end

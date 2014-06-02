@@ -2,6 +2,7 @@ module DoubleDog
   class SignIn
 
     def run(params)
+      # Refactor repeated failure and success definitions !!
       return failure(:nil_username) if params[:username].nil?
       return failure(:blank_username) if params[:username] == ''
       return failure(:nil_password) if params[:password].nil?
@@ -20,10 +21,12 @@ module DoubleDog
   private
 
     def failure(error_name)
+      # Refactor :success? !!
       return :success? => false, :error => error_name
     end
 
     def success(data)
+      # Refactor :success? !!
       return data.merge(:success? => true)
     end
   end

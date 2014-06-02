@@ -2,6 +2,7 @@ module DoubleDog
   class CreateItem
 
     def run(params)
+      ## Refactor repated failure and succes definitions !!
       return failure(:not_admin) unless admin_session?(params[:session_id])
       return failure(:invalid_name) unless valid_name?(params[:name])
       return failure(:invalid_price) unless valid_price?(params[:price])
@@ -26,10 +27,12 @@ module DoubleDog
   private
 
     def failure(error_name)
+      # Refactor :success?
       return :success? => false, :error => error_name
     end
 
     def success(data)
+      # Refactor :success?
       return data.merge(:success? => true)
     end
   end
