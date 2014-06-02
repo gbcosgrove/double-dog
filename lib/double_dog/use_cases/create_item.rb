@@ -1,5 +1,5 @@
 module DoubleDog
-  class CreateItem
+  class CreateItem < SuccessFailure
 
     def run(params)
       ## Refactor repated failure and succes definitions !!
@@ -22,18 +22,6 @@ module DoubleDog
 
     def valid_price?(price)
       price != nil && price >= 0.50
-    end
-
-  private
-
-    def failure(error_name)
-      # Refactor :success?
-      return :success? => false, :error => error_name
-    end
-
-    def success(data)
-      # Refactor :success?
-      return data.merge(:success? => true)
     end
   end
 end

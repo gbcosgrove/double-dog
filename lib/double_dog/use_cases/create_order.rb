@@ -1,5 +1,7 @@
 module DoubleDog
-  class CreateOrder
+  class CreateOrder < SuccessFailure
+
+
     def run(params)
 
       ## Refactor repated failure and succes definitions !!
@@ -13,18 +15,6 @@ module DoubleDog
 
     def valid_items?(items)
       items != nil && items.count >= 1
-    end
-
-  private
-
-    def failure(error_name)
-      # Refactor :success?
-      return :success? => false, :error => error_name
-    end
-
-    def success(data)
-      # Refactor :success?
-      return data.merge(:success? => true)
     end
   end
 end

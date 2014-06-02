@@ -56,16 +56,14 @@ let(:use_case) do
     end
   end
 
-  it "creates an item" do
-    expect(use_case).to receive(:admin_session?).and_return(true)
+    it "creates an item" do
 
-    result = use_case.run(:name => 'smoothie', :price => 10)
-    expect(result[:success?]).to eq true
+      result = use_case.run(:name => 'smoothie', :price => 10)
+      expect(result[:success?]).to eq true
 
-    item = result[:item]
-    expect(item.id).to_not be_nil
-    expect(item.name).to eq 'smoothie'
-    expect(item.price).to eq 10
-  end
-
+      item = result[:item]
+      expect(item.id).to_not be_nil
+      expect(item.name).to eq 'smoothie'
+      expect(item.price).to eq 10
+    end
 end

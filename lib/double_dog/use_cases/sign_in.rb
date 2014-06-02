@@ -1,5 +1,7 @@
 module DoubleDog
-  class SignIn
+  class SignIn < SuccessFailure
+
+
 
     def run(params)
       # Refactor repeated failure and success definitions !!
@@ -16,18 +18,6 @@ module DoubleDog
       session_id = DoubleDog.db.create_session(user_id: user.id)
       retrieved_user = DoubleDog.db.get_user_by_session_id(session_id)
       return success(:user => retrieved_user, :session_id => session_id)
-    end
-
-  private
-
-    def failure(error_name)
-      # Refactor :success? !!
-      return :success? => false, :error => error_name
-    end
-
-    def success(data)
-      # Refactor :success? !!
-      return data.merge(:success? => true)
     end
   end
 end

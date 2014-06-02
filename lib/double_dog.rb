@@ -6,6 +6,7 @@ module DoubleDog
   end
 end
 
+require_relative 'double_dog/use_cases/success_failure.rb'
 require_relative 'double_dog/entities/item.rb'
 require_relative 'double_dog/entities/user.rb'
 require_relative 'double_dog/entities/order.rb'

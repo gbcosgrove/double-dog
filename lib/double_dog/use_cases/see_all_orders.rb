@@ -1,5 +1,7 @@
 module DoubleDog
-  class SeeAllOrders
+  class SeeAllOrders <SuccessFailure
+
+
     def run(params)
       ## Refactor repated failure and succes definitions !!
       return failure(:not_admin) unless admin_session?(params[:admin_session])
@@ -11,18 +13,6 @@ module DoubleDog
     def admin_session?(session_id)
       user = DoubleDog.db.get_user_by_session_id(session_id)
       user && user.admin?
-    end
-
-  private
-
-    def failure(error_name)
-      # Refactor :success?
-      return :success? => false, :error => error_name
-    end
-
-    def success(data)
-      # Refactor :success?
-      return data.merge(:success? => true)
     end
   end
 end

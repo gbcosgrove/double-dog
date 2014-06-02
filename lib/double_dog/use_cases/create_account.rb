@@ -1,5 +1,6 @@
 module DoubleDog
-  class CreateAccount
+  class CreateAccount < SuccessFailure
+
 
     def run(params)
       # Refactor repeated failure and succes definitions !!
@@ -22,18 +23,6 @@ module DoubleDog
 
     def valid_password?(password)
       password != nil && password.length >= 3
-    end
-
-  private
-
-    def failure(error_name)
-      # Refactor Here
-      return :success? => false, :error => error_name
-    end
-
-    def success(data)
-      # Refactor Here
-      return data.merge(:success? => true)
     end
   end
 end
