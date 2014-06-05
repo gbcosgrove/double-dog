@@ -10,6 +10,7 @@ module DoubleDog
         User.delete_all
         Item.delete_all
         Order.delete_all
+        Session.delete_all
       end
 
       def initialize
@@ -51,12 +52,13 @@ module DoubleDog
         build_user(user)
       end
 
-      def build_session
-        DoubleDog::Session.new()
+      def build_session(attrs)
+        DoubleDog::Session.new(attrs[:id], attrs[:user_id])
       end
 
       def create_session(attrs)
-
+        ar_session = Session.create(attrs)
+        build_session(ar_session)
       end
 
       def get_user_by_session_id(sid)
@@ -94,6 +96,8 @@ module DoubleDog
       end
 
       def create_order(attr)
+        order_items = attr[:items].map {|o| o.name }
+        order = order_items.each { |name|
         ar_order = Order.create(attr)
         build_order(ar_order)
       end

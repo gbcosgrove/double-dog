@@ -96,6 +96,7 @@ binding.pry
 
     expect(order.id).to_not be_nil
     expect(order.employee_id).to eq(emp.id)
+binding.pry
   end
 
   it "retrieves an order" do
