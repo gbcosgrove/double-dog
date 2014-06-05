@@ -13,6 +13,7 @@ require_relative 'double_dog/entities/item.rb'
 require_relative 'double_dog/entities/user.rb'
 require_relative 'double_dog/entities/order.rb'
 
+require_relative 'double_dog/database/database.rb'
 require_relative 'double_dog/database/in_memory.rb'
 
 require_relative 'double_dog/use_cases/create_account.rb'

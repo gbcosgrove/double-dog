@@ -2,6 +2,12 @@ module DoubleDog
   module Database
     class InMemory
 
+      def clear_all
+        @users = {}
+        @items = {}
+        @orders = {}
+      end
+
       def initialize
         @users = {}
         @users_id_counter = 100

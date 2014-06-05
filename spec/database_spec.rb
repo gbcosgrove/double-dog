@@ -1,5 +1,9 @@
 require 'spec_helper'
 
+## Refactor to allow for two types of databases
+## Assignment
+
+
 describe 'DoubleDog database singleton' do
   it "always returns the same object" do
     database1 = DoubleDog.db
