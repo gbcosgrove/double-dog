@@ -1,10 +1,11 @@
 require 'spec_helper'
+require 'rake'
 
 
 shared_examples "a database" do
 # describe DoubleDog::Database::InMemory do
 #   let(:db) { described_class.new }
-before do
+before(:each) do
   db.clear_all
 end
 
@@ -14,6 +15,7 @@ end
     expect(user.username).to eq 'alice'
     expect(user.has_password? 'pass1').to eq true
     expect(user.admin?).to eq false
+binding.pry
   end
 
   it "creates an admin user" do
@@ -47,7 +49,6 @@ end
   it "retrieves a user by session id" do
     user = db.create_user(:username => 'sally', :password => 'seashells')
     session_id = db.create_session(:user_id => user.id)
-
     retrieved_user = db.get_user_by_session_id(session_id)
     expect(retrieved_user.username).to eq 'sally'
     expect(retrieved_user.has_password? 'seashells').to eq true
