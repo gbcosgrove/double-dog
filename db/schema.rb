@@ -11,16 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140605125528) do
+ActiveRecord::Schema.define(version: 20140604232746) do
 
   create_table "items", force: true do |t|
     t.string  "name"
     t.integer "price"
-  end
-
-  create_table "order_items", force: true do |t|
-    t.integer "order_id"
-    t.integer "item_id"
   end
 
   create_table "orders", force: true do |t|
