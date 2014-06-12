@@ -1,5 +1,4 @@
 require 'active_record'
-# require 'sqlite3'
 require 'pry'
 
 module DoubleDog
@@ -96,10 +95,22 @@ module DoubleDog
       end
 
       def create_order(attr)
-        order_items = attr[:items].map {|o| o.name }
-        order = order_items.each { |name|
-        ar_order = Order.create(attr)
-        build_order(ar_order)
+        order = Order.create(attr[:employee_id])
+        attr[:items].each do |item|
+          OrderItems.create(:item_id => item.id, :order_id => order.id)
+        end
+
+        # 1. Take :items and split out
+        # 2.
+
+        # order_items = attr[:items].map {|o| o.name }
+        # order = order_items.each { |name| }
+        # ar_order = Order.create(attr)
+        # build_order(ar_order)
+      end
+
+      def build_order_items()
+
       end
 
       def get_order(id)
