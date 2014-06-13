@@ -14,13 +14,18 @@
 ActiveRecord::Schema.define(version: 20140604232746) do
 
   create_table "items", force: true do |t|
-    t.string  "name"
-    t.integer "price"
+    t.integer  "orders_id"
+    t.string   "name"
+    t.integer  "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "orders", force: true do |t|
-    t.integer "employee_id"
-    t.integer "item_id"
+    t.integer  "employee_id"
+    t.integer  "item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "sessions", force: true do |t|
@@ -28,9 +33,11 @@ ActiveRecord::Schema.define(version: 20140604232746) do
   end
 
   create_table "users", force: true do |t|
-    t.string  "username"
-    t.string  "password"
-    t.boolean "admin"
+    t.string   "username"
+    t.string   "password"
+    t.boolean  "admin"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

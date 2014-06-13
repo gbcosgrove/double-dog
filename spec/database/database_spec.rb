@@ -1,5 +1,7 @@
 require 'spec_helper'
 require 'rake'
+require 'minitest/autorun'
+require 'pry-rescue/minitest'
 
 
 shared_examples "a database" do
@@ -47,11 +49,13 @@ end
 
   it "retrieves a user by session id" do
     user = db.create_user(:username => 'sally', :password => 'seashells')
-    session_id = db.create_session(:user_id => user.id)
+    session_id = db.create_session(user.id)
     retrieved_user = db.get_user_by_session_id(session_id)
-    expect(retrieved_user.username).to eq 'sally'
+    expect(retrieved_user.username).to eq('sally')
     expect(retrieved_user.has_password? 'seashells').to eq true
+
   end
+
 
   it "creates an item" do
     item = db.create_item(:name => 'hot dog', :price => 5)
@@ -90,9 +94,9 @@ end
     item_3 = db.create_item(:name => 'potato', :price => 8)
     emp = db.create_user(:username => 'mitch', :password => 'pass1')
 
+
     order = db.create_order(:employee_id => emp.id, :items => [item_1, item_2, item_3])
     expect(order).to be_a DoubleDog::Order
-
     expect(order.id).to_not be_nil
     expect(order.employee_id).to eq(emp.id)
   end

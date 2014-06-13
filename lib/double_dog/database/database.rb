@@ -56,13 +56,20 @@ module DoubleDog
       end
 
       def create_session(attrs)
-        ar_session = Session.create(attrs)
+        id = attrs[:user_id]
+        ar_session = Session.create({:user_id => id})
         build_session(ar_session)
       end
 
       def get_user_by_session_id(sid)
+        # Find the session by session-id - set to a variable
+        # Get the user_id of the session - set to a variable
+        # Find the user using the user_id from session
+        # build a user by passing in the previous variable into
         ar_session = Session.find_by(id: sid)
-        ar_user = {id: ar_session[:user_id]}
+        session = build_session(ar_session)
+        id = session.user_id
+        ar_user = User.find_by(id: id)
         build_user(ar_user)
       end
 
@@ -82,7 +89,9 @@ module DoubleDog
 
       def all_items
         ar_item = Item.all
-        build_item(ar_item)
+        ar_item.map do |item|
+          build_item(item)
+        end
       end
 
       def get_item(id)
@@ -91,31 +100,21 @@ module DoubleDog
       end
 
       def build_order(attrs)
-        DoubleDog::Order.new(attrs[:id], attrs[:employee_id], attrs[:item_id])
+        DoubleDog::Order.new(attrs[:id], attrs[:employee_id], attrs[:items])
       end
 
       def create_order(attr)
-        order = Order.create(attr[:employee_id])
-        attr[:items].each do |item|
-          OrderItems.create(:item_id => item.id, :order_id => order.id)
-        end
-
-        # 1. Take :items and split out
-        # 2.
-
-        # order_items = attr[:items].map {|o| o.name }
-        # order = order_items.each { |name| }
-        # ar_order = Order.create(attr)
-        # build_order(ar_order)
+        ar_order = Order.create(:employee_id => attr[:employee_id])
+        build_order = {:id => ar_order.id, :employee_id => ar_order.employee_id, :items => attr[:items]}
+        build_order(build_order)
       end
 
-      def build_order_items()
-
-      end
 
       def get_order(id)
         ar_order = Order.find_by(id: id)
-        build_order(ar_order)
+        ar_order_items = ar_order.items
+        order = {:id => ar_order.id, :employee_id => ar_order.employee_id, :items => ar_order_items}
+        build_order(order)
       end
 
       def all_orders

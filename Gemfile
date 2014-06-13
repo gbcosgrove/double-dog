@@ -10,4 +10,7 @@ gem 'rspec-rails'
 group :test do
   gem 'rspec', '~> 2.14.0'
   gem 'pry-debugger', '~> 0.2.2'
+  gem 'pry'
+  gem 'pry-rescue'
+  gem 'pry-stack_explorer'
 end
